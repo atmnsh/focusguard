@@ -1,0 +1,88 @@
+/* Login.css */
+
+/* Центрируем весь блок по горизонтали и вертикали на странице */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Занимает всю высоту окна */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Стили для карточки формы */
+.login-form {
+  width: 100%;
+  max-width: 400px; /* Ограничиваем ширину для удобочитаемости */
+  padding: 32px;
+  border-radius: var(--g-border-radius-xl);
+  background-color: var(--g-color-base-background);
+}
+
+/* Стили для заголовка */
+.login-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.login-title {
+  font-size: var(--g-text-header-2-font-size);
+  font-weight: var(--g-text-header-font-weight);
+  color: var(--g-color-text-primary);
+}
+
+/* Стили для блока с полями ввода и тени */
+.login-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Отступ между полями */
+  margin-bottom: 24px;
+}
+
+/* Стилизация самого input внутри обертки */
+.g-text-input__control {
+  /* Фиксированная высота 40px */
+  height: 40px !important; /* !important нужен для переопределения стилей Gravity UI */
+  min-height: 40px !important;
+  /* Остальные стили */
+  border-radius: 8px;
+}
+
+/* Стили для основной кнопки - ИСПРАВЛЕНО */
+.login-submit-button {
+  /* Убираем width: 100% */
+  display: block; /* Чтобы сработали автоматические отступы */
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+  /* Устанавливаем такую же ширину, как у полей ввода */
+  height: 40px;
+  width: 85%;
+  max-width: 100%; /* Гарантируем, что не будет шире родителя */
+  box-sizing: border-box; /* Учитываем padding и border в ширине */
+}
+
+/* Стили для блока с разделителем */
+.login-divider {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.divider-line {
+  flex-grow: 1;
+}
+
+.divider-text {
+  padding: 0 12px;
+  font-size: var(--g-text-body-1-font-size);
+  color: var(--g-color-text-secondary);
+}
+
+/* Стили для футера с текстом и ссылкой */
+.login-footer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: var(--g-text-body-1-font-size);
+  color: var(--g-color-text-secondary);
+}
