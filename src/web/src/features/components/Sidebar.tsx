@@ -1,7 +1,8 @@
 import { Drawer, Button, Divider, Icon } from "@gravity-ui/uikit";
 import React from "react";
 import "./Sidebar.css";
-import { SidebarSVG } from "../../assets/icons/SidebarSVG";
+//import { SidebarSVG } from "../../assets/icons/SidebarSVG";
+import { Bars } from "@gravity-ui/icons";
 
 export const Sidebar = () => {
   const [isVisible, setVisible] = React.useState(false);
@@ -9,7 +10,7 @@ export const Sidebar = () => {
   return (
     <div>
       <Button size="l" view="flat" onClick={() => setVisible(true)}>
-        <Icon data={SidebarSVG} size={18} />
+        <Bars />
       </Button>
       <Drawer
         onOpenChange={setVisible}
@@ -28,7 +29,7 @@ export const Sidebar = () => {
 
           <div className="sidebar-middle-section">
             <Button className="sidebar-button" view="flat">
-              Set Focus
+              Avatar
             </Button>
             <Button className="sidebar-button" view="flat">
               Dashboard

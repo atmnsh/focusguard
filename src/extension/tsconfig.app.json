@@ -23,5 +23,9 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "../web/src/features/Login", "../web/src/assets/icons"]
+  "include": [
+    "src",
+    "../web/src/features/pages/Login",
+    "../web/src/assets/icons"
+  ]
 }
