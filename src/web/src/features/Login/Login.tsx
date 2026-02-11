@@ -4,7 +4,6 @@ import "@gravity-ui/uikit/styles/styles.css";
 import { Button, TextInput, Container, Divider } from "@gravity-ui/uikit";
 import "./Login.css";
 
-import { Sidebar } from "../components/Sidebar";
 //import { Timer } from "../components/Timer";
 
 export const Login = () => {
