@@ -40,7 +40,7 @@ export const SignUp = () => {
         </div>
         <p className="login-footer">
           Вече имате акаунт?&nbsp;
-          <Button href="#" view="flat">
+          <Button href="/login" view="flat">
             Продължи
           </Button>
         </p>

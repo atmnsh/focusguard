@@ -1,10 +1,7 @@
 import "@gravity-ui/uikit/styles/fonts.css";
 import "@gravity-ui/uikit/styles/styles.css";
-
 import { Button, TextInput, Container, Divider } from "@gravity-ui/uikit";
 import "./Login.css";
-
-//import { Timer } from "../components/Timer";
 
 export const Login = () => {
   return (
@@ -42,7 +39,7 @@ export const Login = () => {
         </div>
         <p className="login-footer">
           Трябва да създадете акаунт?&nbsp;
-          <Button href="#" view="flat">
+          <Button href="/signup" view="flat">
             Продължи
           </Button>
         </p>
