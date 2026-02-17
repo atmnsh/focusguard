@@ -24,6 +24,10 @@ export const SignUp = () => {
             placeholder="Въведете паролата си"
             className="g-text-input__control "
           />
+          <TextInput
+            placeholder="Повторете паролата си"
+            className="g-text-input__control "
+          />
         </Container>
         <Button view="action" className="login-submit-button">
           Регистрирайте се

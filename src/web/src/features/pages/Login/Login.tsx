@@ -12,10 +12,6 @@ export const Login = () => {
         </div>
         <Container className="login-fields">
           <TextInput
-            placeholder="Въведете потребителското си име"
-            className="g-text-input__control"
-          />
-          <TextInput
             placeholder="Въведете имейла си"
             className="g-text-input__control "
           />

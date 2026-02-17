@@ -1,19 +1,14 @@
-/* Login.css */
-
-/* Центрируем весь блок по горизонтали и вертикали на странице */
 .login-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; /* Занимает всю высоту окна */
-  padding: 20px;
+  height: 100vh;
   box-sizing: border-box;
 }
 
-/* Стили для карточки формы */
 .login-form {
   width: 100%;
-  max-width: 400px; /* Ограничиваем ширину для удобочитаемости */
+  max-width: 500px;
   padding: 32px;
   border-radius: var(--g-border-radius-xl);
   background-color: var(--g-color-base-background);
@@ -26,7 +21,7 @@
 }
 
 .login-title {
-  font-size: var(--g-text-header-2-font-size);
+  font-size: xx-large;
   font-weight: var(--g-text-header-font-weight);
   color: var(--g-color-text-primary);
 }
@@ -35,34 +30,28 @@
 .login-fields {
   display: flex;
   flex-direction: column;
-  gap: 16px; /* Отступ между полями */
+  gap: 16px;
+
   margin-bottom: 24px;
 }
 
-/* Стилизация самого input внутри обертки */
 .g-text-input__control {
-  /* Фиксированная высота 40px */
-  height: 40px !important; /* !important нужен для переопределения стилей Gravity UI */
+  height: 50px !important;
   min-height: 40px !important;
-  /* Остальные стили */
   border-radius: 8px;
 }
 
-/* Стили для основной кнопки - ИСПРАВЛЕНО */
 .login-submit-button {
-  /* Убираем width: 100% */
-  display: block; /* Чтобы сработали автоматические отступы */
+  display: block;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 20px;
-  /* Устанавливаем такую же ширину, как у полей ввода */
-  height: 40px;
+  height: 50px;
   width: 85%;
-  max-width: 100%; /* Гарантируем, что не будет шире родителя */
-  box-sizing: border-box; /* Учитываем padding и border в ширине */
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
-/* Стили для блока с разделителем */
 .login-divider {
   display: flex;
   align-items: center;

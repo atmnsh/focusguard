@@ -4,6 +4,10 @@
   height: 100%;
 }
 
+.icon {
+  margin-top: 15px;
+}
+
 .sidebar-content {
   display: flex;
   flex-direction: column;

@@ -9,7 +9,12 @@ export const Sidebar = () => {
 
   return (
     <div>
-      <Button size="l" view="flat" onClick={() => setVisible(true)}>
+      <Button
+        size="l"
+        view="flat"
+        onClick={() => setVisible(true)}
+        className="icon"
+      >
         <Bars />
       </Button>
       <Drawer

@@ -18,7 +18,6 @@ export const Dashboard = () => {
             width: "80%",
             display: "flex",
             justifySelf: "center",
-            height: "16vh",
             paddingLeft: "2vh",
             paddingRight: "1.5vh",
           }}
