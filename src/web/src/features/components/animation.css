@@ -1,0 +1,8 @@
+:root {
+  --sprite-sheet: url("");
+  --fps: 8;
+  --frames: 8;
+  --width: 64px;
+  --height: 64px;
+  --scale: 4; /* frames scaled up 4x to 256x256 */
+}
