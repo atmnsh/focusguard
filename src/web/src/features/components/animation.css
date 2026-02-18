@@ -1,8 +1,42 @@
 :root {
-  --sprite-sheet: url("");
+  --sprite-sheet: url("/src/web/src/assets/Dude_Monster_Walk_6.png");
   --fps: 8;
-  --frames: 8;
-  --width: 64px;
-  --height: 64px;
-  --scale: 4; /* frames scaled up 4x to 256x256 */
+  --frames: 6;
+  --width: 32px;
+  --height: 32px;
+  --scale: 5;
+}
+
+@keyframes sprite-animation {
+  from {
+    background-position-x: 0;
+  }
+  to {
+    background-position-x: calc(var(--frames) * var(--width));
+  }
+}
+.frame {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(var(--height) * var(--scale));
+}
+
+.animatedSprite {
+  animation: sprite-animation 1s steps(var(--frames)) infinite;
+  animation-duration: calc(1s / var(--fps) * var(--frames));
+  background-image: var(--sprite-sheet);
+
+  scale: var(--scale);
+  width: var(--width);
+  height: var(--height);
+  position: relative;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  border-color: #eee6;
+  transition:
+    filter 0.3s ease-in-out,
+    border 0.1s,
+    scale 0.3s ease-in-out;
 }

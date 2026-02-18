@@ -1,4 +1,7 @@
 import { useState, useEffect, useRef } from "react";
+import dudeMonsterWalk from "@/assets/Dude_Monster_Walk_6.png";
+import owletMonsterIdle from "@/assets/Owlet_Monster_Idle_4.png";
+import pinkMonsterJump from "@/assets/Pink_Monster_Jump_8.png";
 
 const DEFAULT_FPS = 8;
 
@@ -11,7 +14,7 @@ interface Animation {
 type AnimationKey = "run" | "roll" | "idle" | "hit" | "die";
 
 const animations: Record<AnimationKey, Animation> = {
-  run: { name: "Run", frames: 8 },
+  run: { name: "Run", frames: 6 },
   roll: { name: "Roll", frames: 6 },
   idle: { name: "Idle", frames: 2, fps: 2 },
   hit: { name: "Hit", frames: 3 },
@@ -26,13 +29,9 @@ export default function SpriteAnimator() {
   const animation = animations[selectedAnimation];
   const fps = animation.fps ?? DEFAULT_FPS;
 
-  // Apply CSS custom properties dynamically
   useEffect(() => {
     const root = document.documentElement;
-    root.style.setProperty(
-      "--sprite-sheet",
-      `url("../images/Cowboy${animation.name}.png")`,
-    );
+    root.style.setProperty("--sprite-sheet", `url("${dudeMonsterWalk}")`);
     root.style.setProperty("--frames", String(animation.frames));
     root.style.setProperty("--fps", String(fps));
   }, [animation, fps]);
@@ -70,7 +69,6 @@ export default function SpriteAnimator() {
           </option>
         ))}
       </select>
-
       <div
         ref={spriteRef}
         className="animatedSprite"
