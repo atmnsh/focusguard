@@ -1,80 +1,77 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import dudeMonsterWalk from "@/assets/Dude_Monster_Walk_6.png";
 import owletMonsterIdle from "@/assets/Owlet_Monster_Idle_4.png";
 import pinkMonsterJump from "@/assets/Pink_Monster_Jump_8.png";
+import "../components/animation.css";
 
 const DEFAULT_FPS = 8;
 
-interface Animation {
+interface AnimationConfig {
   name: string;
+  src: string;
   frames: number;
   fps?: number;
 }
 
-type AnimationKey = "run" | "roll" | "idle" | "hit" | "die";
+export const availableAnimations: AnimationConfig[] = [
+  { name: "Dude Walk", src: dudeMonsterWalk, frames: 6, fps: 8 },
+  { name: "Owlet Idle", src: owletMonsterIdle, frames: 4, fps: 8 },
+  { name: "Pink Jump", src: pinkMonsterJump, frames: 8, fps: 8 },
+];
 
-const animations: Record<AnimationKey, Animation> = {
-  run: { name: "Run", frames: 6 },
-  roll: { name: "Roll", frames: 6 },
-  idle: { name: "Idle", frames: 2, fps: 2 },
-  hit: { name: "Hit", frames: 3 },
-  die: { name: "Die", frames: 7 },
-};
+interface SpriteAnimatorProps {
+  animationIndex: number;
+}
 
-export default function SpriteAnimator() {
-  const [selectedAnimation, setSelectedAnimation] =
-    useState<AnimationKey>("run");
+export default function SpriteAnimator({
+  animationIndex,
+}: SpriteAnimatorProps) {
   const spriteRef = useRef<HTMLDivElement>(null);
 
-  const animation = animations[selectedAnimation];
+  const animation =
+    availableAnimations[animationIndex] ?? availableAnimations[0];
   const fps = animation.fps ?? DEFAULT_FPS;
 
+  // Calculate duration
+  const duration = animation.frames / fps;
+
+  // Create unique keyframes for this specific animation
+  const keyframesName = `sprite-anim-${animationIndex}`;
+
   useEffect(() => {
-    const root = document.documentElement;
-    root.style.setProperty("--sprite-sheet", `url("${dudeMonsterWalk}")`);
-    root.style.setProperty("--frames", String(animation.frames));
-    root.style.setProperty("--fps", String(fps));
-  }, [animation, fps]);
-
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedAnimation(event.target.value as AnimationKey);
-  };
-
-  const handleAnimationStart = (
-    event: React.AnimationEvent<HTMLDivElement>,
-  ) => {
-    console.log("Animation started:", event.animationName);
-  };
-
-  const handleAnimationEnd = (event: React.AnimationEvent<HTMLDivElement>) => {
-    console.log("Animation ended:", event.animationName);
-  };
-
-  const handleAnimationIteration = (
-    event: React.AnimationEvent<HTMLDivElement>,
-  ) => {
-    console.log("Animation iteration:", event.animationName);
-  };
+    // Inject dynamic keyframes for this specific animation
+    const styleId = `dynamic-anim-${animationIndex}`;
+    if (!document.getElementById(styleId)) {
+      const style = document.createElement("style");
+      style.id = styleId;
+      style.textContent = `
+        @keyframes ${keyframesName} {
+          from { background-position-x: 0px; }
+          to { background-position-x: -${animation.frames * 32}px; }
+        }
+      `;
+      document.head.appendChild(style);
+    }
+  }, [animationIndex, animation.frames]);
 
   return (
-    <div>
-      <select
-        id="animation-states"
-        value={selectedAnimation}
-        onChange={handleChange}
-      >
-        {(Object.keys(animations) as AnimationKey[]).map((key) => (
-          <option key={key} value={key}>
-            {key}
-          </option>
-        ))}
-      </select>
+    <div className="flex flex-col items-center gap-4">
       <div
         ref={spriteRef}
-        className="animatedSprite"
-        onAnimationStart={handleAnimationStart}
-        onAnimationEnd={handleAnimationEnd}
-        onAnimationIteration={handleAnimationIteration}
+        style={{
+          width: "32px",
+          height: "32px",
+          scale: "5",
+          position: "relative",
+          backgroundImage: `url("${animation.src}")`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "auto 100%",
+          imageRendering: "pixelated",
+          animationName: keyframesName,
+          animationTimingFunction: `steps(${animation.frames})`,
+          animationIterationCount: "infinite",
+          animationDuration: `${duration}s`,
+        }}
       />
     </div>
   );
