@@ -2,7 +2,6 @@ import { useEffect, useRef } from "react";
 import dudeMonsterWalk from "@/assets/Dude_Monster_Walk_6.png";
 import owletMonsterIdle from "@/assets/Owlet_Monster_Idle_4.png";
 import pinkMonsterJump from "@/assets/Pink_Monster_Jump_8.png";
-import "../components/animation.css";
 
 const DEFAULT_FPS = 8;
 
