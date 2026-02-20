@@ -14,6 +14,7 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "../components/ui/sidebar";
+import { Separator } from "../components/ui/separator";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
@@ -23,8 +24,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenuItem>
             <SidebarMenuButton>
               <User />
-              Моят Профил
+              <a>Моят Профил</a>
             </SidebarMenuButton>
+            <Separator
+              orientation="horizontal"
+              className="mr-2 h-4 mb-3 mt-1"
+            />
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
@@ -33,13 +38,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenuItem>
             <SidebarMenuButton>
               <PieChart />
-              Статистика
+              <a href="/dash">Статистика</a>
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
             <SidebarMenuButton>
               <Bot />
-              Аватар
+              <a href="/av">Аватар</a>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
@@ -47,6 +52,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
+            <Separator
+              orientation="horizontal"
+              className="mr-2 h-4 mt-3 mb-1"
+            />
+
             <SidebarMenuButton>
               <Settings />
               Настройки
