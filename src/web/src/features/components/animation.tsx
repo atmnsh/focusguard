@@ -13,9 +13,9 @@ interface AnimationConfig {
 }
 
 export const availableAnimations: AnimationConfig[] = [
-  { name: "Dude Walk", src: dudeMonsterWalk, frames: 6, fps: 8 },
-  { name: "Owlet Idle", src: owletMonsterIdle, frames: 4, fps: 8 },
-  { name: "Pink Jump", src: pinkMonsterJump, frames: 8, fps: 8 },
+  { name: "Dude", src: dudeMonsterWalk, frames: 6, fps: 8 },
+  { name: "Owlet", src: owletMonsterIdle, frames: 4, fps: 8 },
+  { name: "Pink Monster", src: pinkMonsterJump, frames: 8, fps: 8 },
 ];
 
 interface SpriteAnimatorProps {
@@ -54,7 +54,7 @@ export default function SpriteAnimator({
   }, [animationIndex, animation.frames]);
 
   return (
-    <div className="flex flex-col items-center gap-4">
+    <div className="flex flex-col items-center">
       <div
         ref={spriteRef}
         style={{
@@ -70,8 +70,13 @@ export default function SpriteAnimator({
           animationTimingFunction: `steps(${animation.frames})`,
           animationIterationCount: "infinite",
           animationDuration: `${duration}s`,
+          marginBottom: "100px",
+          marginTop: "50px",
         }}
       />
+      <div className="text-lg font-bold text-gray-800 flex place-self-end mb-0 ">
+        {animation.name}
+      </div>
     </div>
   );
 }
