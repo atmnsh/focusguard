@@ -1,55 +1,59 @@
-import { Drawer, Button, Divider, Icon } from "@gravity-ui/uikit";
-import React from "react";
-import "./Sidebar.css";
-//import { SidebarSVG } from "../../assets/icons/SidebarSVG";
-import { Bars } from "@gravity-ui/icons";
+// app-sidebar.tsx
+"use client";
 
-export const Sidebar = () => {
-  const [isVisible, setVisible] = React.useState(false);
+import * as React from "react";
+import { Settings, User, PieChart, Bot } from "lucide-react";
 
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarRail,
+} from "../components/ui/sidebar";
+
+export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <div>
-      <Button
-        size="l"
-        view="flat"
-        onClick={() => setVisible(true)}
-        className="icon"
-      >
-        <Bars />
-      </Button>
-      <Drawer
-        onOpenChange={setVisible}
-        open={isVisible}
-        placement="left"
-        className="sidebar-drawer"
-      >
-        <div className="sidebar-content" onClick={() => setVisible(false)}>
-          <div className="sidebar-profile-section">
-            <Button className="sidebar-button" view="flat">
-              My Profile
-            </Button>
-          </div>
-
-          <Divider className="sidebar-divider" />
-
-          <div className="sidebar-middle-section">
-            <Button className="sidebar-button" view="flat">
-              Avatar
-            </Button>
-            <Button className="sidebar-button" view="flat">
-              Dashboard
-            </Button>
-          </div>
-
-          <Divider className="sidebar-divider" />
-
-          <div className="sidebar-bottom-section">
-            <Button className="sidebar-button" view="flat">
-              Settings
-            </Button>
-          </div>
-        </div>
-      </Drawer>
-    </div>
+    <Sidebar collapsible="icon">
+      <SidebarHeader className="p-0">
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton>
+              <User />
+              Моят Профил
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarHeader>
+      <SidebarContent>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton>
+              <PieChart />
+              Статистика
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          <SidebarMenuItem>
+            <SidebarMenuButton>
+              <Bot />
+              Аватар
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarContent>
+      <SidebarFooter>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton>
+              <Settings />
+              Настройки
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarFooter>
+    </Sidebar>
   );
-};
+}

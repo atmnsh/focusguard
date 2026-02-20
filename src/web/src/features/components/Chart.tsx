@@ -74,7 +74,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 
 export const Chart = () => {
   return (
-    <Card>
+    <div>
       <div
         style={{
           display: "flex",
@@ -84,7 +84,7 @@ export const Chart = () => {
         }}
       >
         <p style={{ fontSize: "x-large" }}>Статистика</p>
-        <p style={{ fontSize: "large", marginTop: "-1vh" }}>
+        <p style={{ fontSize: "large", marginTop: "2vh" }}>
           За последна седмица
         </p>
       </div>
@@ -133,6 +133,6 @@ export const Chart = () => {
         </div>
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm"></CardFooter>
-    </Card>
+    </div>
   );
 };
