@@ -13,13 +13,10 @@ export const Dashboard = () => {
     <div>
       <SidebarProvider>
         <AppSidebar />
-        <SidebarInset>
+        <SidebarInset className="bg-muted">
           <header className="flex h-12 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 mb-15 ">
-            <SidebarTrigger className="ml-2" />
-            <Separator
-              orientation="vertical"
-              className="mr-2 h-4 mb-3 mt-1 bg-accent"
-            />
+            <SidebarTrigger className="ml-3" />
+            <Separator orientation="vertical" className="mr-2 h-4 mb-3 mt-1 " />
             <p className="text-xl ml-2">Focusguard</p>
           </header>
 
@@ -29,7 +26,7 @@ export const Dashboard = () => {
               style={{
                 fontSize: "x-large",
                 marginLeft: "10vh",
-                marginTop: "7vh",
+                marginTop: "5vh",
               }}
             >
               Обобщение:
@@ -42,8 +39,9 @@ export const Dashboard = () => {
                 padding: "2vh",
                 marginTop: "3vh",
               }}
+              className=""
             >
-              <p style={{ fontSize: "large" }}>
+              <p className="text-lg ">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
                 enim ad minim veniam, quis nostrud exercitation ullamco laboris

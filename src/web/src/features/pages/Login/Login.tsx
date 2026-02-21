@@ -48,7 +48,9 @@ export const Login = ({ className, ...props }: React.ComponentProps<"div">) => {
                     <Input id="password" type="password" required />
                   </Field>
                   <Field>
-                    <Button type="submit">Влез</Button>
+                    <Button type="submit">
+                      <a href="/dash">Влез</a>
+                    </Button>
                   </Field>
                   <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card">
                     Или продължете с

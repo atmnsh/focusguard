@@ -35,16 +35,20 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton>
-              <PieChart />
-              <a href="/dash">Статистика</a>
-            </SidebarMenuButton>
+            <a href="/dash">
+              <SidebarMenuButton>
+                <PieChart />
+                Статистика
+              </SidebarMenuButton>
+            </a>
           </SidebarMenuItem>
           <SidebarMenuItem>
-            <SidebarMenuButton>
-              <Bot />
-              <a href="/av">Аватар</a>
-            </SidebarMenuButton>
+            <a href="/av">
+              <SidebarMenuButton>
+                <Bot />
+                Аватар
+              </SidebarMenuButton>
+            </a>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarContent>

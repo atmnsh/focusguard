@@ -74,7 +74,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 
 export const Chart = () => {
   return (
-    <Card className="w-10/12 flex self-center">
+    <Card className="w-10/12 flex self-center -mt-5">
       <div
         style={{
           display: "flex",

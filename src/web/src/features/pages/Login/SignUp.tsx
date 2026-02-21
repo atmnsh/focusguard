@@ -60,7 +60,9 @@ export const SignUp = ({
                     </FieldDescription>
                   </Field>
                   <Field>
-                    <Button type="submit">Регистрирай се</Button>
+                    <Button type="submit">
+                      <a href="/dash">Регистрирай се</a>
+                    </Button>
                   </Field>
                   <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card">
                     Или продължете с

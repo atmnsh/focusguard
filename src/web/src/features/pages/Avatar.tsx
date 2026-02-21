@@ -7,26 +7,40 @@ import {
   SidebarTrigger,
 } from "../components/ui/sidebar";
 import { Separator } from "../components/ui/separator";
+import { Label } from "../components/ui/label";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "../components/ui/card";
 
 export const Avatar = () => {
   return (
     <SidebarProvider>
       <AppSidebar />
-      <SidebarInset>
+      <SidebarInset className="bg-muted">
         <header className="flex h-12 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 mb-15 ">
-          <SidebarTrigger className="ml-2" />
-          <Separator
-            orientation="vertical"
-            className="mr-2 h-4 mb-3 mt-1 bg-accent"
-          />
+          <SidebarTrigger className="ml-3" />
+          <Separator orientation="vertical" className="mr-2 h-4 mb-3 mt-1" />
           <p className="text-xl ml-2">Focusguard</p>
         </header>
-        <div className="flex flex-col p-4 pt-0 justify-self-center items-center s">
-          <CarouselComponent />
-          <Button className="flex justify-self-center mt-10 w-sm">
-            Избери
-          </Button>
-        </div>
+        <Card className="flex flex-col p-4 pt-0 self-center items-center w-1/2 h-3/4 ">
+          <CardHeader className="flex items-center -ml-70 mt-20 ">
+            <CardTitle className="text-center text-2xl text-nowrap">
+              Изберете своя аватар
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="-mt-12">
+            <CarouselComponent />
+          </CardContent>
+          <CardFooter>
+            <Button className="flex justify-self-center  w-sm mb-5">
+              Избери
+            </Button>
+          </CardFooter>
+        </Card>
       </SidebarInset>
     </SidebarProvider>
   );
