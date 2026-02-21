@@ -74,7 +74,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 
 export const Chart = () => {
   return (
-    <div>
+    <Card className="w-10/12 flex self-center">
       <div
         style={{
           display: "flex",
@@ -119,20 +119,19 @@ export const Chart = () => {
               <Bar
                 name="desktop"
                 dataKey="desktop"
-                fill="#2563eb"
+                fill="#f7c44d"
                 radius={[4, 4, 0, 0]}
               />
               <Bar
                 name="mobile"
                 dataKey="mobile"
-                fill="#60a5fa"
+                fill="#c9910e"
                 radius={[4, 4, 0, 0]}
               />
             </BarChart>
           </ResponsiveContainer>
         </div>
       </CardContent>
-      <CardFooter className="flex-col items-start gap-2 text-sm"></CardFooter>
-    </div>
+    </Card>
   );
 };

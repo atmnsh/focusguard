@@ -13,10 +13,15 @@ export const Avatar = () => {
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
+        <header className="flex h-12 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 mb-15 ">
           <SidebarTrigger className="ml-2" />
+          <Separator
+            orientation="vertical"
+            className="mr-2 h-4 mb-3 mt-1 bg-accent"
+          />
+          <p className="text-xl ml-2">Focusguard</p>
         </header>
-        <div className="flex flex-1 flex-col p-4 pt-0">
+        <div className="flex flex-col p-4 pt-0 justify-self-center items-center s">
           <CarouselComponent />
           <Button className="flex justify-self-center mt-10 w-sm">
             Избери

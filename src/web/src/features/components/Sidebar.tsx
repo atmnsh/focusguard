@@ -1,4 +1,3 @@
-// app-sidebar.tsx
 "use client";
 
 import * as React from "react";
@@ -18,8 +17,8 @@ import { Separator } from "../components/ui/separator";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar collapsible="icon">
-      <SidebarHeader className="p-0">
+    <Sidebar collapsible="icon" className="flex items-center">
+      <SidebarHeader className="p-0 mt-2">
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton>

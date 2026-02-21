@@ -74,9 +74,9 @@ export default function SpriteAnimator({
           marginTop: "50px",
         }}
       />
-      <div className="text-lg font-bold text-gray-800 flex place-self-end mb-0 ">
+      {/* <div className="text-lg font-bold text-gray-800 flex place-self-end mb-0 ">
         {animation.name}
-      </div>
+      </div> */}
     </div>
   );
 }

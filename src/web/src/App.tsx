@@ -9,7 +9,7 @@ import "@gravity-ui/uikit/styles/styles.css";
 function App() {
   return (
     <Routes>
-      <Route element={<SignUp />} path="/signup" />
+      <Route element={<SignUp />} path="/" />
       <Route element={<Login />} path="/login" />
       <Route element={<Dashboard />} path="/dash" />
       <Route element={<Avatar />} path="/av" />
