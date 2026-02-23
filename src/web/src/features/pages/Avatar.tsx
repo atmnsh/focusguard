@@ -42,7 +42,7 @@ export const Avatar = () => {
             <CarouselComponent />
           </CardContent>
           <CardFooter>
-            <Button className="flex justify-self-center h-md  w-xs mb-5 bg-[#f7c44d] text-black">
+            <Button className="flex justify-self-center h-md  w-xs mb-5 bg-[#f7c44d] text-black hover:bg-accent">
               Избери
             </Button>
           </CardFooter>

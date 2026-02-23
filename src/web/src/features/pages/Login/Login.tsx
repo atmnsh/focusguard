@@ -39,7 +39,7 @@ export const Login = ({ className, ...props }: React.ComponentProps<"div">) => {
                     <div className="flex items-center">
                       <FieldLabel htmlFor="password">Парола</FieldLabel>
                       <a
-                        href="#"
+                        href="/password"
                         className="ml-auto text-sm underline-offset-2 hover:underline"
                       >
                         Забравихте паролата?
@@ -49,7 +49,10 @@ export const Login = ({ className, ...props }: React.ComponentProps<"div">) => {
                   </Field>
                   <Field>
                     <a href="/dash">
-                      <Button type="submit" className="bg-[#f7c44d] text-black">
+                      <Button
+                        type="submit"
+                        className="bg-[#f7c44d] text-black w-full"
+                      >
                         Влез
                       </Button>
                     </a>

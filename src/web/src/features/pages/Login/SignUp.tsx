@@ -63,7 +63,7 @@ export const SignUp = ({
                     <a href="/dash">
                       <Button
                         type="submit"
-                        className="bg-[#f7c44d] text-black hover:bg-accent"
+                        className="bg-[#f7c44d] text-black hover:bg-accent w-full"
                       >
                         Регистрирай се
                       </Button>

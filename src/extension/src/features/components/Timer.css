@@ -1,5 +1,3 @@
-/* Timer.css */
-
 .timer-container {
   max-width: 500px;
   margin: 0 auto;
@@ -11,7 +9,6 @@
   transition: all 0.3s ease;
 }
 
-/* Стили для скрытия/показа элементов */
 .div-hidden {
   display: none !important;
   visibility: hidden;
@@ -21,7 +18,6 @@
   transition: all 0.3s ease;
 }
 
-/* Верхняя часть - заголовок */
 .timer-header {
   text-align: center;
   margin-bottom: 32px;
@@ -40,7 +36,6 @@
   color: var(--g-color-text-secondary);
 }
 
-/* Стили для ввода времени */
 .time-input-section {
   display: flex;
   justify-content: center;
@@ -97,7 +92,6 @@
   padding-bottom: 18px;
 }
 
-/* Основной контейнер дисплея */
 .timer-main-display {
   margin-bottom: 32px;
   min-height: 140px;
@@ -106,7 +100,6 @@
   justify-content: center;
 }
 
-/* Дисплей в режиме настройки */
 .timer-display-section {
   text-align: center;
   padding: 24px;
@@ -131,7 +124,6 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* Дисплей в режиме отсчета */
 .timer-running-display {
   text-align: center;
   padding: 32px;
@@ -141,7 +133,7 @@
     var(--g-color-base-brand-light) 100%
   );
   border-radius: var(--g-border-radius-xl);
-  box-shadow: 0 8px 32px rgba(0, 112, 204, 0.2);
+  box-shadow: 0 8px 32px #f7c44d;
   animation: fadeIn 0.5s ease;
   width: 100%;
 }
@@ -156,7 +148,6 @@
   margin-bottom: 2vh;
 }
 
-/* Анимация появления */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -168,7 +159,6 @@
   }
 }
 
-/* Стили для состояния таймера */
 .timer-running .timer-container {
   padding: 32px 24px;
 }
@@ -194,7 +184,6 @@
   }
 }
 
-/* Стили для кнопок управления */
 .timer-controls {
   display: flex;
   justify-content: center;
@@ -215,7 +204,7 @@
 }
 
 .timer-button-start {
-  background-color: var(--g-color-base-brand);
+  background-color: #f7c44d;
   color: var(--g-color-text-light-primary);
   border: none;
 }
@@ -250,7 +239,6 @@
   cursor: not-allowed;
 }
 
-/* Адаптивность */
 @media (max-width: 480px) {
   .time-input {
     width: 60px;
