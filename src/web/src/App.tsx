@@ -3,17 +3,18 @@ import { SignUp } from "../src/features/pages/Login/SignUp";
 import { Dashboard } from "./features/pages/Dashboard";
 import { Avatar } from "./features/pages/Avatar";
 import { Route, Routes } from "react-router-dom";
-import "@gravity-ui/uikit/styles/fonts.css";
-import "@gravity-ui/uikit/styles/styles.css";
+import { ThemeProvider } from "./features/components/theme-provider";
 
 function App() {
   return (
-    <Routes>
-      <Route element={<SignUp />} path="/" />
-      <Route element={<Login />} path="/login" />
-      <Route element={<Dashboard />} path="/dash" />
-      <Route element={<Avatar />} path="/av" />
-    </Routes>
+    <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+      <Routes>
+        <Route element={<SignUp />} path="/" />
+        <Route element={<Login />} path="/login" />
+        <Route element={<Dashboard />} path="/dash" />
+        <Route element={<Avatar />} path="/av" />
+      </Routes>
+    </ThemeProvider>
   );
 }
 
