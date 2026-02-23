@@ -10,11 +10,13 @@ import {
 } from "@/features/components/ui/field";
 import { Input } from "@/features/components/ui/input";
 import SpriteAnimator from "@/features/components/animation";
+import { useNavigate } from "react-router-dom";
 
 export const SignUp = ({
   className,
   ...props
 }: React.ComponentProps<"div">) => {
+  const navigate = useNavigate();
   return (
     <div className="bg-muted flex min-h-svh flex-col items-center justify-center p-6 md:p-10">
       <div className="w-10/12 max-w-sm md:max-w-4xl">
@@ -60,14 +62,13 @@ export const SignUp = ({
                     </FieldDescription>
                   </Field>
                   <Field>
-                    <a href="/dash">
-                      <Button
-                        type="submit"
-                        className="bg-[#f7c44d] text-black hover:bg-accent w-full"
-                      >
-                        Регистрирай се
-                      </Button>
-                    </a>
+                    <Button
+                      type="submit"
+                      className="bg-[#f7c44d] text-black hover:bg-accent w-full"
+                      onClick={() => navigate("/dash")}
+                    >
+                      Регистрирай се
+                    </Button>
                   </Field>
                   <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card">
                     Или продължете с
@@ -104,8 +105,11 @@ export const SignUp = ({
                   <span className="sr-only">Sign up with Meta</span>
                 </Button> */}
                   </Field>
-                  <FieldDescription className="text-center">
-                    Вече имате акаунт? <a href="/login">Влезте</a>
+                  <FieldDescription
+                    className="text-center"
+                    onClick={() => navigate("/login")}
+                  >
+                    Вече имате акаунт? Влезте
                   </FieldDescription>
                 </FieldGroup>
               </form>

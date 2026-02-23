@@ -14,8 +14,10 @@ import {
   SidebarRail,
 } from "../components/ui/sidebar";
 import { Separator } from "../components/ui/separator";
+import { useNavigate } from "react-router-dom";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const navigate = useNavigate();
   return (
     <Sidebar collapsible="icon" className="flex items-center">
       <SidebarHeader className="p-0 mt-2">
@@ -23,7 +25,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenuItem>
             <SidebarMenuButton>
               <User />
-              <a>Моят Профил</a>
+              Моят Профил
             </SidebarMenuButton>
             <Separator
               orientation="horizontal"
@@ -35,20 +37,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
         <SidebarMenu>
           <SidebarMenuItem>
-            <a href="/dash">
-              <SidebarMenuButton>
-                <PieChart />
-                Статистика
-              </SidebarMenuButton>
-            </a>
+            <SidebarMenuButton onClick={() => navigate("/dash")}>
+              <PieChart />
+              Статистика
+            </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
-            <a href="/av">
-              <SidebarMenuButton>
-                <Bot />
-                Аватар
-              </SidebarMenuButton>
-            </a>
+            <SidebarMenuButton onClick={() => navigate("/av")}>
+              <Bot />
+              Аватар
+            </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarContent>

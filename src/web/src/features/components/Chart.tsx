@@ -28,15 +28,16 @@ const CustomTooltip = ({ active, payload, label }: any) => {
     return (
       <div
         style={{
-          backgroundColor: "white",
           padding: "12px 16px",
           border: "1px solid #e2e8f0",
           borderRadius: "8px",
           boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
         }}
+        className="bg-white dark:bg-black "
       >
         <p
-          style={{ margin: "0 0 8px 0", fontWeight: "bold", color: "#1e293b" }}
+          style={{ margin: "0 0 8px 0", fontWeight: "bold" }}
+          className="text-black dark:text-white"
         >
           {label}
         </p>
@@ -49,6 +50,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
               gap: "8px",
               marginBottom: "4px",
             }}
+            className="text-black dark:text-white"
           >
             <div
               style={{
@@ -57,11 +59,15 @@ const CustomTooltip = ({ active, payload, label }: any) => {
                 backgroundColor: entry.color,
                 borderRadius: "2px",
               }}
+              className="text-black dark:text-white"
             />
-            <span style={{ color: "#475569" }}>
+            <span className="text-black dark:text-white">
               {entry.name === "desktop" ? "Продуктивност:" : "Разсейване:"}
             </span>
-            <span style={{ fontWeight: "bold", color: "#0f172a" }}>
+            <span
+              style={{ fontWeight: "bold" }}
+              className="text-black dark:text-white"
+            >
               {entry.value}
             </span>
           </div>

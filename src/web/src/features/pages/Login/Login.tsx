@@ -10,8 +10,10 @@ import {
 } from "@/features/components/ui/field";
 import { Input } from "@/features/components/ui/input";
 import SpriteAnimator from "@/features/components/animation";
+import { useNavigate } from "react-router-dom";
 
 export const Login = ({ className, ...props }: React.ComponentProps<"div">) => {
+  const navigate = useNavigate();
   return (
     <div className="bg-muted flex min-h-svh flex-col items-center justify-center p-6 md:p-10">
       <div className="w-10/12 max-w-sm md:max-w-4xl">
@@ -38,24 +40,23 @@ export const Login = ({ className, ...props }: React.ComponentProps<"div">) => {
                   <Field>
                     <div className="flex items-center">
                       <FieldLabel htmlFor="password">Парола</FieldLabel>
-                      <a
-                        href="/password"
+                      <div
+                        onClick={() => navigate("/password")}
                         className="ml-auto text-sm underline-offset-2 hover:underline"
                       >
                         Забравихте паролата?
-                      </a>
+                      </div>
                     </div>
                     <Input id="password" type="password" required />
                   </Field>
                   <Field>
-                    <a href="/dash">
-                      <Button
-                        type="submit"
-                        className="bg-[#f7c44d] text-black w-full"
-                      >
-                        Влез
-                      </Button>
-                    </a>
+                    <Button
+                      type="submit"
+                      className="bg-[#f7c44d] text-black w-full hover:bg-accent"
+                      onClick={() => navigate("/dash")}
+                    >
+                      Влез
+                    </Button>
                   </Field>
                   <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card">
                     Или продължете с
@@ -98,8 +99,11 @@ export const Login = ({ className, ...props }: React.ComponentProps<"div">) => {
                       <span className="sr-only">Login with Meta</span>
                     </Button> */}
                   </Field>
-                  <FieldDescription className="text-center">
-                    Нямате акаунт? <a href="/">Регистрирай се</a>
+                  <FieldDescription
+                    className="text-center"
+                    onClick={() => navigate("/")}
+                  >
+                    Нямате акаунт? Регистрирай се
                   </FieldDescription>
                 </FieldGroup>
               </form>
