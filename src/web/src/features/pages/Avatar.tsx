@@ -24,7 +24,7 @@ export const Avatar = () => {
         <header className="flex h-12 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 mb-15 ">
           <SidebarTrigger className="ml-3" />
           <Separator orientation="vertical" className="mr-2 h-4 mb-3 mt-1" />
-          <p className="text-xl ml-2">Focusguard</p>
+          <p className="text-xl ml-2 ">Focusguard</p>
         </header>
         <Card className="flex flex-col p-4 pt-0 self-center items-center w-1/2 h-3/4 ">
           <CardHeader className="flex items-center -ml-70 mt-20 ">
@@ -36,7 +36,7 @@ export const Avatar = () => {
             <CarouselComponent />
           </CardContent>
           <CardFooter>
-            <Button className="flex justify-self-center  w-sm mb-5">
+            <Button className="flex justify-self-center h-md  w-xs mb-5 bg-[#f7c44d] text-black">
               Избери
             </Button>
           </CardFooter>
