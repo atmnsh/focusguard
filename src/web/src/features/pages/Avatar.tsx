@@ -32,7 +32,7 @@ export const Avatar = () => {
             <ModeToggle />
           </div>
         </header>
-        <Card className="flex flex-col p-4 pt-0 self-center items-center w-1/2 h-3/4 ">
+        {/* <Card className="flex flex-col p-4 pt-0 self-center items-center w-1/2 h-3/4 ">
           <CardHeader className="flex items-center -ml-70 mt-20 ">
             <CardTitle className="text-center text-2xl text-nowrap">
               Изберете своя аватар
@@ -46,7 +46,8 @@ export const Avatar = () => {
               Избери
             </Button>
           </CardFooter>
-        </Card>
+        </Card> */}
+        <CarouselComponent />
       </SidebarInset>
     </SidebarProvider>
   );
