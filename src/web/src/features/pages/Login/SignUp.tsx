@@ -65,7 +65,7 @@ export const SignUp = ({
                     <Button
                       type="submit"
                       className="bg-[#f7c44d] text-black hover:bg-accent w-full"
-                      onClick={() => navigate("/dash")}
+                      onClick={() => navigate("/main")}
                     >
                       Регистрирай се
                     </Button>

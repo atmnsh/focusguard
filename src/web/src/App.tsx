@@ -5,6 +5,7 @@ import { Avatar } from "./features/pages/Avatar";
 import ForgotPassword from "./features/pages/Login/Forgot-password";
 import ResetPassword from "./features/pages/Login/Reset-password";
 import { LandingPage } from "./features/pages/LandingPage";
+import { MainPage } from "./features/pages/MainPage";
 import { Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "./features/components/theme-provider";
 
@@ -19,6 +20,7 @@ function App() {
         <Route element={<ForgotPassword />} path="/password" />
         <Route element={<ResetPassword />} path="/reset-pass" />
         <Route element={<LandingPage />} path="/" />
+        <Route element={<MainPage />} path="/main" />
       </Routes>
     </ThemeProvider>
   );

@@ -100,13 +100,13 @@ export const HeroSection = () => {
         <div className="grid grid-cols-1 gap-6 gap-y-12 md:gap-y-16 lg:grid-cols-5">
           <div className="flex w-full flex-col justify-center gap-5 max-lg:items-center lg:col-span-3 lg:h-95.5">
             <h1 className="text-3xl leading-[1.29167] font-semibold text-balance max-lg:text-center sm:text-4xl lg:text-5xl">
-              FocusGuard - blablabla
+              FocusGuard
             </h1>
-
+            <h2 className="text-xl leading-[1.29167] font-light text-balance max-lg:text-center sm:text-2xl lg:text-3xl">
+              Ти решаваш. Ние подкрепяме.
+            </h2>
             <p className="text-muted-foreground max-w-xl text-xl max-lg:text-center text-wrap">
-              blablablablablablablablablablablablablablablablablabla
-              blablablablablablablablablablablablablablablablablabla
-              blablablablablablablablablablablablablablablablablablablablabla
+              Защото истинският фокус идва отвътре
             </p>
 
             <div className="flex items-center gap-4">

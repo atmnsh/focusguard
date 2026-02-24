@@ -53,7 +53,7 @@ export const Login = ({ className, ...props }: React.ComponentProps<"div">) => {
                     <Button
                       type="submit"
                       className="bg-[#f7c44d] text-black w-full hover:bg-accent"
-                      onClick={() => navigate("/dash")}
+                      onClick={() => navigate("/main")}
                     >
                       Влез
                     </Button>

@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Settings, User, PieChart, Bot } from "lucide-react";
+import { Settings, User, PieChart, Bot, FileDown } from "lucide-react";
 
 import {
   Sidebar,
@@ -36,6 +36,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton onClick={() => navigate("/main")}>
+              <FileDown />
+              Изтегляне
+            </SidebarMenuButton>
+          </SidebarMenuItem>
           <SidebarMenuItem>
             <SidebarMenuButton onClick={() => navigate("/dash")}>
               <PieChart />
