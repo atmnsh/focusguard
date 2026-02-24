@@ -101,7 +101,7 @@ export const Login = ({ className, ...props }: React.ComponentProps<"div">) => {
                   </Field>
                   <FieldDescription
                     className="text-center"
-                    onClick={() => navigate("/")}
+                    onClick={() => navigate("/signup")}
                   >
                     Нямате акаунт? Регистрирай се
                   </FieldDescription>
