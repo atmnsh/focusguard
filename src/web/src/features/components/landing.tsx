@@ -9,8 +9,6 @@ import Autoplay from "embla-carousel-autoplay";
 import SpriteAnimator from "../components/animation";
 import { availableAnimations } from "../components/animation";
 
-import { Separator } from "../components/ui/separator";
-
 import { Button } from "../components/ui/button";
 import {
   type CarouselApi,
@@ -29,7 +27,6 @@ export const HeroSection = () => {
   const [commentsApi, setCommentsApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
 
-  // Use availableAnimations length for looping
   const totalItems = availableAnimations.length;
 
   useEffect(() => {
@@ -43,7 +40,6 @@ export const HeroSection = () => {
 
       setCurrent(selectedIndex);
 
-      // Sync all carousels with main carousel
       thumbApi?.scrollTo(selectedIndex);
       commentsApi?.scrollTo(selectedIndex);
     });
@@ -59,7 +55,6 @@ export const HeroSection = () => {
 
       setCurrent(selectedIndex);
 
-      // Sync main and comments carousel with thumbnail carousel
       mainApi?.scrollTo(selectedIndex);
       commentsApi?.scrollTo(selectedIndex);
     });
@@ -75,7 +70,6 @@ export const HeroSection = () => {
 
       setCurrent(selectedIndex);
 
-      // Sync main and thumbnail carousel with comments carousel
       mainApi?.scrollTo(selectedIndex);
       thumbApi?.scrollTo(selectedIndex);
     });
@@ -90,13 +84,11 @@ export const HeroSection = () => {
 
   const plugin = useRef(Autoplay({ delay: 3000, stopOnInteraction: false }));
 
-  // Helper to get animation index with wrap-around for infinite loop feel
   const getAnimIndex = (index: number) => index % totalItems;
 
   return (
     <section className="flex-1 py-12 sm:py-16 lg:py-24">
       <div className="mx-auto flex h-full max-w-7xl flex-col gap-16 px-4 sm:px-6 lg:px-8">
-        {/* Hero Header */}
         <div className="grid grid-cols-1 gap-6 gap-y-12 md:gap-y-16 lg:grid-cols-5">
           <div className="flex w-full flex-col justify-center gap-5 max-lg:items-center lg:col-span-3 lg:h-95.5">
             <h1 className="text-3xl leading-[1.29167] font-semibold text-balance max-lg:text-center sm:text-4xl lg:text-5xl">
@@ -129,7 +121,6 @@ export const HeroSection = () => {
             </div>
           </div>
 
-          {/* Main Carousel - Large Animation Display */}
           <Carousel
             className="w-full lg:col-span-2"
             setApi={setMainApi}
@@ -154,7 +145,6 @@ export const HeroSection = () => {
         </div>
 
         <div className="grid grid-cols-1 gap-24 gap-y-12 md:gap-y-16 lg:grid-cols-5">
-          {/* Thumbnail Carousel - Small Animation Previews */}
           <Carousel
             className="relative w-full max-lg:order-2 lg:col-span-3"
             setApi={setThumbApi}
@@ -193,7 +183,6 @@ export const HeroSection = () => {
                         />
                       </svg>
                     </div>
-                    {/* Scaled down animation for thumbnail */}
                     <div className="scale-50">
                       <SpriteAnimator animationIndex={index} />
                     </div>

@@ -5,10 +5,15 @@
     { "path": "./tsconfig.node.json" }
   ],
   "compilerOptions": {
+    "typeRoots": ["./node_modules/@types"],
+    "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@/lib/*": ["../web/src/lib/*"],
+      "@/features/*": ["../web/src/features/*"]
     },
+    "exclude": ["../web/node_modules"],
     "ignoreDeprecations": "6.0"
   }
 }
