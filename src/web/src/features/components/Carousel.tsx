@@ -31,7 +31,7 @@ export function CarouselComponent() {
               <CardContent className="-mb-4">
                 <SpriteAnimator animationIndex={index} />
               </CardContent>
-              <CardHeader className="flex items-center mr-15">
+              <CardHeader className="flex items-center mr-16">
                 <CardTitle className="text-xl text-nowrap">
                   {anim.name}
                 </CardTitle>

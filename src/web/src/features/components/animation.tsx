@@ -13,9 +13,9 @@ interface AnimationConfig {
 }
 
 export const availableAnimations: AnimationConfig[] = [
-  { name: "Dude", src: dudeMonsterWalk, frames: 6, fps: 8 },
-  { name: "Owlet", src: owletMonsterIdle, frames: 4, fps: 8 },
-  { name: "Bunny", src: pinkMonsterJump, frames: 8, fps: 8 },
+  { name: "Момче", src: dudeMonsterWalk, frames: 6, fps: 8 },
+  { name: "Бухал", src: owletMonsterIdle, frames: 4, fps: 8 },
+  { name: "Заече", src: pinkMonsterJump, frames: 8, fps: 8 },
 ];
 
 interface SpriteAnimatorProps {
