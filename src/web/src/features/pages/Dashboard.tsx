@@ -49,13 +49,13 @@ export const Dashboard = () => {
               className=""
             >
               <p className="text-lg ">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
+                За изминалата седмица потребителят е провел 12 работни сесии с
+                обща продължителност от 8 часа и 34 минути, от които 73% са
+                прекарани в концентрирана работа. Най-продуктивните му часове са
+                между 10:00 и 12:00, докато най-честото разсейване е засечено
+                следобед около 15:00. В сравнение с предходната седмица
+                продуктивността му е нараснала с 18%, което показва устойчива
+                положителна тенденция в навиците му.
               </p>
             </Card>
           </div>
