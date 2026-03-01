@@ -24,3 +24,16 @@ build
 *.njsproj
 *.sln
 *.sw?
+backend/bin/mac/*
+!backend/bin/mac/.gitkeep
+backend/bin/win/*
+!backend/bin/win/.gitkeep
+backend/bin/linux/*
+!backend/bin/linux/.gitkeep
+backend/target/
+backend/Cargo.lock
+node_modules/
+dist/
+.DS_Store
+.idea/
+.vscode/
