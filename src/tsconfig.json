@@ -1,0 +1,32 @@
+{
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.node.json"
+    },
+  ],
+  "exclude": [
+    "./node_modules"
+  ],
+  "compilerOptions": {
+    "typeRoots": [
+      "./node_modules/@types"
+    ],
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./web/ui/*"
+      ],
+      "@/lib/*": [
+        "./web/ui/lib/*"
+      ],
+      "@/features/*": [
+        "./web/ui/features/*"
+      ]
+    }
+  },
+}

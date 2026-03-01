@@ -1,0 +1,264 @@
+/* Focus.css */
+
+.focus-container {
+  display: flex;
+  max-height: 400px;
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: var(--g-color-base-background);
+  font-family: var(--g-font-family-sans);
+  flex-direction: column;
+  border-radius: var(--g-border-radius-xl);
+  position: relative;
+}
+
+/* Основной контент */
+.focus-content {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
+}
+
+.focus-card {
+  width: 100%;
+  background-color: var(--g-color-base-float);
+  border-radius: var(--g-border-radius-l);
+  padding: 20px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* Заголовок страницы - компактнее */
+.focus-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.focus-title {
+  font-size: 1.5rem;
+  font-weight: var(--g-text-header-font-weight);
+  color: var(--g-color-text-primary);
+  margin-bottom: 10px;
+}
+
+.focus-subtitle {
+  font-size: 0.9rem;
+  color: var(--g-color-text-secondary);
+  line-height: 1.4;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* Секция занятия - уменьшены отступы */
+.activity-section {
+  margin-bottom: 20px;
+}
+
+.section-label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--g-color-text-primary);
+  margin-bottom: 6px;
+}
+
+.section-description {
+  font-size: 0.85rem;
+  color: var(--g-color-text-secondary);
+  margin-bottom: 10px;
+}
+
+.activity-input {
+  width: 100%;
+}
+
+.activity-input .g-text-input__control {
+  height: 42px;
+  font-size: 0.95rem;
+  border-radius: var(--g-border-radius-m);
+  border: 1px solid var(--g-color-line-generic);
+  padding: 0 12px;
+  transition: all 0.2s ease;
+}
+
+.activity-input .g-text-input__control:focus {
+  border-color: var(--g-color-line-brand);
+  box-shadow: 0 0 0 2px rgba(0, 112, 204, 0.1);
+}
+
+.timer-section {
+  margin-bottom: 20px;
+}
+
+.timer-wrapper {
+  background-color: var(--g-color-base-background);
+  border-radius: var(--g-border-radius-l);
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.actions-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--g-color-line-generic);
+}
+
+.save-button,
+.remove-button {
+  flex: 1;
+  min-width: 120px;
+  max-width: 180px;
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: var(--g-border-radius-m);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  text-align: center;
+  height: 40px;
+  box-sizing: border-box;
+}
+
+.save-button {
+  background-color: #f7c44d;
+  color: black;
+  border: none;
+}
+
+.save-button:hover {
+  background-color: var(--g-color-base-brand-hover);
+  transform: translateY(-1px);
+}
+
+.remove-button {
+  background-color: transparent;
+  color: var(--g-color-text-primary);
+  border: 1px solid var(--g-color-line-generic);
+}
+
+.remove-button:hover {
+  background-color: var(--g-color-base-simple-hover);
+  border-color: var(--g-color-line-generic-hover);
+  transform: translateY(-1px);
+}
+
+/* Десктопная версия для 1000px контейнера */
+@media (min-width: 768px) {
+  .focus-container {
+    flex-direction: row;
+    height: 1000px;
+  }
+
+  .focus-content {
+    width: calc(100% - 240px);
+    padding: 24px;
+    justify-content: center;
+  }
+
+  .focus-card {
+    max-height: 900px;
+    padding: 24px;
+  }
+}
+
+/* Компактная версия для маленьких экранов внутри контейнера */
+@media (max-width: 767px) {
+  .sidebar-desktop {
+    display: none;
+  }
+
+  .sidebar-mobile-toggle {
+    display: block;
+  }
+
+  .focus-container {
+    height: 1000px;
+    max-width: 100%;
+  }
+
+  .focus-content {
+    padding: 16px;
+    height: 100%;
+  }
+
+  .focus-card {
+    padding: 16px;
+    max-height: 900px;
+  }
+
+  .actions-section {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .save-button,
+  .remove-button {
+    min-width: 100%;
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+/* Очень компактная версия */
+@media (max-width: 480px) {
+  .focus-content {
+    padding: 12px;
+  }
+
+  .focus-card {
+    padding: 12px;
+  }
+
+  .focus-title {
+    font-size: 1.3rem;
+  }
+
+  .focus-subtitle {
+    font-size: 0.8rem;
+  }
+
+  .section-label {
+    font-size: 0.85rem;
+  }
+
+  .section-description {
+    font-size: 0.8rem;
+  }
+
+  .activity-input .g-text-input__control {
+    height: 38px;
+    font-size: 0.9rem;
+  }
+
+  .save-button,
+  .remove-button {
+    height: 38px;
+    padding: 8px 16px;
+    font-size: 0.85rem;
+  }
+}
+
+/* Анимации */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.focus-card {
+  animation: slideIn 0.3s ease-out;
+}
