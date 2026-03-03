@@ -32,6 +32,7 @@ pub struct GameMonitorState {
     pub last_tick: Mutex<Instant>,
     pub distracted_time_sec: Mutex<u64>,
     pub productive_time_sec: Mutex<u64>,
+    pub is_timer_running: Mutex<bool>,
 }
 
 impl Default for GameMonitorState {
@@ -44,6 +45,7 @@ impl Default for GameMonitorState {
             last_tick: Mutex::new(Instant::now()),
             distracted_time_sec: Mutex::new(0),
             productive_time_sec: Mutex::new(0),
+            is_timer_running: Mutex::new(false),
         }
     }
 }
@@ -61,6 +63,16 @@ pub async fn add_custom_game(
 ) -> Result<(), String> {
     let mut games = state.game_list.lock().unwrap();
     games.insert(game_name);
+    Ok(())
+}
+
+#[tauri::command]
+pub async fn set_timer_state(
+    state: State<'_, GameMonitorState>,
+    is_running: bool,
+) -> Result<(), String> {
+    let mut timer_state = state.is_timer_running.lock().unwrap();
+    *timer_state = is_running;
     Ok(())
 }
 
@@ -273,6 +285,16 @@ pub async fn monitor_games(app_handle: AppHandle) {
         }
 
         for game in to_start {
+            let is_timer_running = {
+                let state = app_handle.state::<GameMonitorState>();
+                *state.is_timer_running.lock().unwrap()
+            };
+
+            if !is_timer_running {
+                println!("Skipping avatar for {} because focus timer is not active.", game);
+                continue;
+            }
+
             // Spawn the Godot avatar as a standalone bundle resource (skipping sidecars to bypass PCK execution security errors)
             let resource_path = app_handle.path().resource_dir().unwrap_or_default().join("bin");
 
