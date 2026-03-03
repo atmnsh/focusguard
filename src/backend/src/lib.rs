@@ -23,20 +23,13 @@ pub fn run() {
                 db: Mutex::new(conn),
             });
 
-            // Initialize game monitor state
             app.manage(GameMonitorState::default());
 
             let app_handle = app.handle().clone();
-            
-            // Spawn background game monitoring
+
             tauri::async_runtime::spawn(async move {
                 pc_background_activity::monitor_games(app_handle.clone()).await;
             });
-
-            // Example of fetching browser history automatically on startup (can be moved to a command if preferred)
-            // tauri::async_runtime::spawn(async move {
-            //     let _ = activity_track::fetch_from_browser::fetch_browser_history(app_handle);
-            // });
 
             Ok(())
         })
@@ -45,6 +38,7 @@ pub fn run() {
             auth::register,
             auth::login,
             pc_background_activity::add_custom_game,
+            pc_background_activity::set_timer_state,
             pc_background_activity::get_active_games,
             pc_background_activity::get_daily_usage,
         ])
