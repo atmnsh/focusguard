@@ -1,4 +1,5 @@
 import { useState, useEffect, type ChangeEvent } from "react";
+import { invoke } from "@tauri-apps/api/core";
 import "./Timer.css";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
@@ -18,6 +19,9 @@ export const Timer = () => {
     return time.toString().padStart(2, "0");
   };
 
+  useEffect(() => {
+    invoke('set_timer_state', { isRunning }).catch(console.error);
+  }, [isRunning]);
 
   useEffect(() => {
     let timer: number | undefined;
