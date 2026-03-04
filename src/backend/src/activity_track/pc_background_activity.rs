@@ -287,8 +287,12 @@ pub async fn monitor_games(app_handle: AppHandle) {
         for game in to_start {
             let is_timer_running = {
                 let state = app_handle.state::<GameMonitorState>();
+<<<<<<< Updated upstream
                 let val = *state.is_timer_running.lock().unwrap();
                 val
+=======
+                let x = *state.is_timer_running.lock().unwrap(); x
+>>>>>>> Stashed changes
             };
 
             if !is_timer_running {

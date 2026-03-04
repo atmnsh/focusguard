@@ -27,7 +27,11 @@ export const HeroSection = () => {
   const [commentsApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
 
+<<<<<<< Updated upstream
 
+=======
+  // const totalItems = availableAnimations.length;
+>>>>>>> Stashed changes
 
   useEffect(() => {
     if (!mainApi) {
@@ -84,7 +88,11 @@ export const HeroSection = () => {
 
   const plugin = useRef(Autoplay({ delay: 3000, stopOnInteraction: false }));
 
+<<<<<<< Updated upstream
 
+=======
+  // const getAnimIndex = (index: number) => index % totalItems;
+>>>>>>> Stashed changes
 
   return (
     <section className="flex-1 py-12 sm:py-16 lg:py-24">
@@ -130,7 +138,11 @@ export const HeroSection = () => {
             }}
           >
             <CarouselContent>
+<<<<<<< Updated upstream
               {availableAnimations.map((_, index) => (
+=======
+              {availableAnimations.map((_anim, index) => (
+>>>>>>> Stashed changes
                 <CarouselItem
                   key={index}
                   className="flex w-full items-center justify-center"
@@ -155,7 +167,11 @@ export const HeroSection = () => {
             <div className="from-background pointer-events-none absolute inset-y-0 left-0 z-1 w-25 bg-gradient-to-r via-85% to-transparent" />
             <div className="from-background pointer-events-none absolute inset-y-0 right-0 z-1 w-25 bg-gradient-to-l via-85% to-transparent" />
             <CarouselContent className="my-1 flex">
+<<<<<<< Updated upstream
               {availableAnimations.map((_, index) => (
+=======
+              {availableAnimations.map((_anim, index) => (
+>>>>>>> Stashed changes
                 <CarouselItem
                   key={index}
                   className={cn(
