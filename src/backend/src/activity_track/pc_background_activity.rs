@@ -108,7 +108,7 @@ pub async fn get_daily_usage(state: State<'_, GameMonitorState>) -> Result<Daily
 }
 
 async fn fetch_gemini_audio(game_name: &str, output_path: &PathBuf) -> Result<String, String> {
-    let api_key = "AIzaSyDNCTeNNaPwWuTdwDB2HAwIE-I7fuXCdN0".to_string();
+    let api_key = "AIzaSyBTsmWvZXZwHAt5OAndA2fyGkU0P5AM1O4".to_string();
     
     let prompt = format!("I just opened the computer game {}. Give me a sassy or dramatic 1 sentence quote telling me to close it and get back to work. Keep it very short.", game_name);
     
@@ -248,9 +248,6 @@ pub async fn monitor_games(app_handle: AppHandle) {
                 }
             }
             
-            // Tally time based on active processes.
-            // Distracted time = if any known "game" is running.
-            // Productive time = if logic dictates (for now, any time tracking active but no games).
             if !active_games.is_empty() {
                 let mut dist = state.distracted_time_sec.lock().unwrap();
                 *dist += elapsed_sec;
@@ -287,12 +284,8 @@ pub async fn monitor_games(app_handle: AppHandle) {
         for game in to_start {
             let is_timer_running = {
                 let state = app_handle.state::<GameMonitorState>();
-<<<<<<< Updated upstream
                 let val = *state.is_timer_running.lock().unwrap();
                 val
-=======
-                let x = *state.is_timer_running.lock().unwrap(); x
->>>>>>> Stashed changes
             };
 
             if !is_timer_running {

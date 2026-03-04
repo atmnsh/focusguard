@@ -1,7 +1,7 @@
 extends Node
 class_name VoiceAssistant
 
-const API_KEY = "AIzaSyDSmoIgckIB1uobsRqew0RIJ-SqNUrEC1Q"
+const API_KEY = "AIzaSyBTsmWvZXZwHAt5OAndA2fyGkU0P5AM1O4"
 const GEMINI_URL = "https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=" + API_KEY
 const TTS_URL = "https://texttospeech.googleapis.com/v1/text:synthesize?key=" + API_KEY
 
