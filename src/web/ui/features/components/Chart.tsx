@@ -9,10 +9,9 @@ import {
   XAxis,
   YAxis,
   ResponsiveContainer,
-  Legend,
   Tooltip,
 } from "recharts";
-import { Card, CardContent, CardFooter } from "../components/ui/card";
+import { Card, CardContent } from "../components/ui/card";
 
 const initialChartData = [
   { month: "Понеделник", desktop: 186, mobile: 80 },

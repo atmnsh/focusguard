@@ -24,10 +24,10 @@ export const HeroSection = () => {
 
   const [mainApi, setMainApi] = useState<CarouselApi>();
   const [thumbApi, setThumbApi] = useState<CarouselApi>();
-  const [commentsApi, setCommentsApi] = useState<CarouselApi>();
+  const [commentsApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
 
-  const totalItems = availableAnimations.length;
+
 
   useEffect(() => {
     if (!mainApi) {
@@ -84,7 +84,7 @@ export const HeroSection = () => {
 
   const plugin = useRef(Autoplay({ delay: 3000, stopOnInteraction: false }));
 
-  const getAnimIndex = (index: number) => index % totalItems;
+
 
   return (
     <section className="flex-1 py-12 sm:py-16 lg:py-24">
@@ -130,7 +130,7 @@ export const HeroSection = () => {
             }}
           >
             <CarouselContent>
-              {availableAnimations.map((anim, index) => (
+              {availableAnimations.map((_, index) => (
                 <CarouselItem
                   key={index}
                   className="flex w-full items-center justify-center"
@@ -155,7 +155,7 @@ export const HeroSection = () => {
             <div className="from-background pointer-events-none absolute inset-y-0 left-0 z-1 w-25 bg-gradient-to-r via-85% to-transparent" />
             <div className="from-background pointer-events-none absolute inset-y-0 right-0 z-1 w-25 bg-gradient-to-l via-85% to-transparent" />
             <CarouselContent className="my-1 flex">
-              {availableAnimations.map((anim, index) => (
+              {availableAnimations.map((_, index) => (
                 <CarouselItem
                   key={index}
                   className={cn(
