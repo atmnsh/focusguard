@@ -24,12 +24,6 @@ build
 *.njsproj
 *.sln
 *.sw?
-backend/bin/mac/*
-!backend/bin/mac/.gitkeep
-backend/bin/win/*
-!backend/bin/win/.gitkeep
-backend/bin/linux/*
-!backend/bin/linux/.gitkeep
 backend/target/
 backend/Cargo.lock
 node_modules/
@@ -37,9 +31,3 @@ dist/
 .DS_Store
 .idea/
 .vscode/
-src/avatar/backend/bin/mac/avatar-companion-mac
-src/avatar/backend/bin/mac/DesktopAvatar.app/Contents/MacOS/DesktopAvatar
-src/backend/bin/avatar-companion-aarch64-apple-darwin
-src/backend/bin/avatar-companion-x86_64-apple-darwin
-src/backend/bin/avatar-companion-x86_64-pc-windows-msvc.exe
-src/backend/bin/mac/avatar-companion-mac
