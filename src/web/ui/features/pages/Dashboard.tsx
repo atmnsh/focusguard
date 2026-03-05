@@ -1,5 +1,7 @@
+import { useState, useEffect } from "react";
+import { invoke } from "@tauri-apps/api/core";
 import { AppSidebar } from "../components/Sidebar";
-import { Chart } from "../components/Chart";
+import { Chart, chartData } from "../components/Chart";
 import { Card } from "../components/ui/card";
 import {
   SidebarInset,
@@ -10,6 +12,30 @@ import { Separator } from "../components/ui/separator";
 import { ModeToggle } from "../components/mode-toggle";
 
 export const Dashboard = () => {
+  const [summary, setSummary] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchSummary = async () => {
+      try {
+        const data = chartData.map((d) => ({
+          day: d.month,
+          productive: d.desktop,
+          distracted: d.mobile,
+        }));
+        const result = await invoke<string>("generate_dashboard_summary", { data });
+        setSummary(result);
+      } catch (err) {
+        console.error("Failed to generate summary:", err);
+        setSummary("Не успяхме да заредим обобщението.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSummary();
+  }, []);
+
   return (
     <div>
       <SidebarProvider>
@@ -46,17 +72,14 @@ export const Dashboard = () => {
                 padding: "2vh",
                 marginTop: "3vh",
               }}
-              className=""
             >
-              <p className="text-lg ">
-                За изминалата седмица потребителят е провел 12 работни сесии с
-                обща продължителност от 8 часа и 34 минути, от които 73% са
-                прекарани в концентрирана работа. Най-продуктивните му часове са
-                между 10:00 и 12:00, докато най-честото разсейване е засечено
-                следобед около 15:00. В сравнение с предходната седмица
-                продуктивността му е нараснала с 18%, което показва устойчива
-                положителна тенденция в навиците му.
-              </p>
+              {loading ? (
+                <p className="text-lg text-muted-foreground italic animate-pulse">
+                  Генериране на обобщение...
+                </p>
+              ) : (
+                <p className="text-lg">{summary}</p>
+              )}
             </Card>
           </div>
         </SidebarInset>

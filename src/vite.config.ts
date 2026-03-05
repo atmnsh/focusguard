@@ -15,4 +15,12 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./web/ui"),
     },
   },
+  build: {
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'index.html'),
+        avatar: path.resolve(__dirname, 'avatar.html'),
+      },
+    },
+  },
 });

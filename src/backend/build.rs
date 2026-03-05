@@ -1,3 +1,6 @@
 fn main() {
+    println!("cargo:rustc-env=MACOSX_DEPLOYMENT_TARGET=10.15");
+    println!("cargo:rustc-env=CXXFLAGS=-mmacosx-version-min=10.15");
+    println!("cargo:rustc-env=CFLAGS=-mmacosx-version-min=10.15");
     tauri_build::build()
 }

@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { invoke } from "@tauri-apps/api/core";
+import { useState } from "react";
+
 import {
   Bar,
   BarChart,
@@ -13,7 +13,7 @@ import {
 } from "recharts";
 import { Card, CardContent } from "../components/ui/card";
 
-const initialChartData = [
+export const chartData = [
   { month: "Понеделник", desktop: 186, mobile: 80 },
   { month: "Вторник", desktop: 305, mobile: 200 },
   { month: "Сряда", desktop: 237, mobile: 120 },
@@ -80,38 +80,26 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 };
 
 export const Chart = () => {
-  const [data, setData] = useState(initialChartData);
+  const [data] = useState(chartData);
 
-  useEffect(() => {
-    const fetchUsage = async () => {
-      try {
-        const usage: { productive_sec: number; distracted_sec: number } =
-          await invoke("get_daily_usage");
-
-        // Assuming today is Sunday for the mock, we replace the last item
-        const newData = [...initialChartData];
-
-        // Convert seconds to minutes for the chart
-        const productiveMins = Math.round(usage.productive_sec / 60);
-        const distractedMins = Math.round(usage.distracted_sec / 60);
-
-        newData[6] = {
-          month: "Неделя",
-          desktop: productiveMins,
-          mobile: distractedMins,
-        };
-
-        setData(newData);
-      } catch (err) {
-        console.error("Failed to fetch daily usage:", err);
-      }
-    };
-
-    fetchUsage();
-    // Set an interval to refresh the chart every 5 seconds
-    const interval = setInterval(fetchUsage, 5000);
-    return () => clearInterval(interval);
-  }, []);
+  // useEffect(() => {
+  //   const fetchUsage = async () => {
+  //     try {
+  //       const usage: { productive_sec: number; distracted_sec: number } =
+  //         await invoke("get_daily_usage");
+  //       const newData = [...initialChartData];
+  //       const productiveMins = Math.round(usage.productive_sec / 60);
+  //       const distractedMins = Math.round(usage.distracted_sec / 60);
+  //       newData[6] = { month: "Неделя", desktop: productiveMins, mobile: distractedMins };
+  //       setData(newData);
+  //     } catch (err) {
+  //       console.error("Failed to fetch daily usage:", err);
+  //     }
+  //   };
+  //   fetchUsage();
+  //   const interval = setInterval(fetchUsage, 5000);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   return (
     <Card className="w-10/12 flex self-center -mt-5">

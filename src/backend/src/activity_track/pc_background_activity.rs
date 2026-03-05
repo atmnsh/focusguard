@@ -1,12 +1,9 @@
+use serde_json::{json, Value};
 use std::collections::HashSet;
 use std::sync::Mutex;
-use sysinfo::{System, ProcessesToUpdate};
+use sysinfo::{ProcessesToUpdate, System};
 use tauri::{AppHandle, Emitter, Manager, State};
 use tokio::time::{self, Duration};
-use std::process::{Child, Command};
-use serde_json::{json, Value};
-use base64::Engine;
-use std::path::PathBuf;
 
 const KNOWN_GAMES: &[&str] = &[
     "eldenring",
@@ -17,7 +14,7 @@ const KNOWN_GAMES: &[&str] = &[
     "apexlegends",
     "steam.exe",
     "epicgameslauncher.exe",
-    "thunderbird"
+    "thunderbird",
 ];
 
 use std::time::Instant;
@@ -25,9 +22,9 @@ use std::time::Instant;
 pub struct GameMonitorState {
     pub active_games: Mutex<HashSet<String>>,
     pub game_list: Mutex<HashSet<String>>,
-    pub active_avatars: Mutex<std::collections::HashMap<String, Child>>,
+    pub active_avatars: Mutex<std::collections::HashMap<String, String>>, // Maps game to Window Label
     pub missing_counts: Mutex<std::collections::HashMap<String, u32>>,
-    
+
     // Tracking app usage
     pub last_tick: Mutex<Instant>,
     pub distracted_time_sec: Mutex<u64>,
@@ -92,7 +89,7 @@ pub struct DailyUsage {
 pub async fn get_daily_usage(state: State<'_, GameMonitorState>) -> Result<DailyUsage, String> {
     let prod = *state.productive_time_sec.lock().unwrap();
     let dist = *state.distracted_time_sec.lock().unwrap();
-    
+
     // Temporary mocked data for the chart week if prod/dist are 0, allowing testing
     if prod == 0 && dist == 0 {
         return Ok(DailyUsage {
@@ -107,76 +104,63 @@ pub async fn get_daily_usage(state: State<'_, GameMonitorState>) -> Result<Daily
     })
 }
 
-async fn fetch_gemini_audio(game_name: &str, output_path: &PathBuf) -> Result<String, String> {
-    let api_key = "AIzaSyBTsmWvZXZwHAt5OAndA2fyGkU0P5AM1O4".to_string();
-    
-    let prompt = format!("I just opened the computer game {}. Give me a sassy or dramatic 1 sentence quote telling me to close it and get back to work. Keep it very short.", game_name);
-    
+async fn fetch_deepseek_cartesia_audio(game_name: &str) -> Result<(String, Vec<u8>), String> {
+    let deepseek_key = std::env::var("DEEPSEEK_API_KEY")
+        .map_err(|_| "DEEPSEEK_API_KEY environment variable not set")?;
+    let prompt = format!("Току-що отворих играта {}. Кажи ми едно кратко, насърчаващо и много мило изречение защо трябва да я затворя и да се фокусирам обратно върху целите си.", game_name);
+
     let client = reqwest::Client::new();
-    let url = format!("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key={}", api_key);
     
+    // 1. Get Text from DeepSeek
     let payload = json!({
-        "contents": [{
-            "parts": [{"text": prompt}]
-        }],
-        "generationConfig": {
-            "responseModalities": ["TEXT", "AUDIO"],
-            "speechConfig": {
-                "voiceConfig": {
-                    "prebuiltVoiceConfig": {
-                        "voiceName": "Puck" 
-                    }
-                }
+        "model": "deepseek-chat",
+        "messages": [
+            {
+                "role": "user",
+                "content": prompt
             }
-        }
+        ]
     });
 
-    let res = client.post(&url)
-        .header("Content-Type", "application/json")
+    let res = client
+        .post("https://api.deepseek.com/chat/completions")
+        .header("Authorization", format!("Bearer {}", deepseek_key))
         .json(&payload)
         .send()
         .await
         .map_err(|e| e.to_string())?;
-        
-    let res_json: Value = res.json().await.map_err(|e| e.to_string())?;
 
-    let parts = res_json["candidates"][0]["content"]["parts"]
-        .as_array()
-        .ok_or("No parts found in Gemini response (maybe invalid key or prompt blocked)")?;
-        
-    let mut audio_data = None;
-    let mut text_response = String::new();
+    let json_res: Value = res.json().await.map_err(|e| e.to_string())?;
+    
+    let text_response = json_res["choices"][0]["message"]["content"]
+        .as_str()
+        .unwrap_or(&format!("Хей! Моля те, спри да играеш {} и се върни към работата си!", game_name))
+        .to_string();
 
-    for part in parts {
-        if let Some(inline_data) = part.get("inlineData") {
-            if let Some(data) = inline_data.get("data") {
-                if let Some(s) = data.as_str() {
-                    audio_data = Some(s.to_string());
-                }
-            }
-        }
+    // 2. Get Audio from ElevenLabs
+    let elevenlabs_key = std::env::var("ELEVENLABS_API_KEY").unwrap_or_default();
+    let payload = json!({
+        "model_id": "eleven_multilingual_v2",
+        "text": text_response,
+    });
+
+    let res = client
+        .post("https://api.elevenlabs.io/v1/text-to-speech/CsGB1DArtcqfpLG77Gxy")
+        .header("xi-api-key", elevenlabs_key)
+        .json(&payload)
+        .send()
+        .await
+        .map_err(|e| e.to_string())?;
+
+    if !res.status().is_success() {
+        let error_text = res.text().await.unwrap_or_default();
+        eprintln!("ElevenLabs API Error: {}", error_text);
+        return Err(format!("ElevenLabs API Error: {}", error_text));
     }
 
-    // Try to grab the text transcript from the first part if it's there
-    if let Some(first_part) = parts.first() {
-        if let Some(text) = first_part.get("text") {
-            if let Some(s) = text.as_str() {
-                text_response = s.to_string();
-            }
-        }
-    }
+    let audio_bytes = res.bytes().await.map_err(|e| e.to_string())?.to_vec();
 
-    if let Some(base64_str) = audio_data {
-        let decoded = base64::engine::general_purpose::STANDARD.decode(base64_str).map_err(|e| e.to_string())?;
-        std::fs::write(output_path, decoded).map_err(|e| e.to_string())?;
-        
-        if text_response.is_empty() {
-             text_response = format!("Hey! Stop playing {}!", game_name);
-        }
-        Ok(text_response)
-    } else {
-        Err("No audio payload returned from Gemini".to_string())
-    }
+    Ok((text_response, audio_bytes))
 }
 
 pub async fn monitor_games(app_handle: AppHandle) {
@@ -247,7 +231,7 @@ pub async fn monitor_games(app_handle: AppHandle) {
                     _ => {}
                 }
             }
-            
+
             if !active_games.is_empty() {
                 let mut dist = state.distracted_time_sec.lock().unwrap();
                 *dist += elapsed_sec;
@@ -256,29 +240,20 @@ pub async fn monitor_games(app_handle: AppHandle) {
                 *prod += elapsed_sec;
             }
         }
-        
+
         for game in to_stop {
             let state = app_handle.state::<GameMonitorState>();
             let mut avatars = state.active_avatars.lock().unwrap();
-            if let Some(mut child) = avatars.remove(&game) {
-                if let Err(e) = child.kill() {
-                    eprintln!("Failed to kill Godot Avatar sidecar for {}: {}", game, e);
-                } else {
-                    println!("Successfully killed Godot Avatar sidecar for {}", game);
+            if let Some(window_label) = avatars.remove(&game) {
+                if let Some(window) = app_handle.get_webview_window(&window_label) {
+                    if let Err(e) = window.close() {
+                        eprintln!("Failed to close Tauri Avatar window for {}: {}", game, e);
+                    } else {
+                        println!("Successfully closed Tauri Avatar window for {}", game);
+                    }
                 }
             }
             drop(avatars);
-
-            // Clean up the temporary motivation.wav file
-            let resource_path = app_handle.path().resource_dir().unwrap_or_default().join("bin");
-            let audio_path = resource_path.join("motivation.wav");
-            if audio_path.exists() {
-                if let Err(e) = std::fs::remove_file(&audio_path) {
-                    eprintln!("Failed to clean up audio file {:?}: {}", audio_path, e);
-                } else {
-                    println!("Cleaned up temporal audio file {:?}", audio_path);
-                }
-            }
         }
 
         for game in to_start {
@@ -289,54 +264,63 @@ pub async fn monitor_games(app_handle: AppHandle) {
             };
 
             if !is_timer_running {
-                println!("Skipping avatar for {} because focus timer is not active.", game);
+                println!(
+                    "Skipping avatar for {} because focus timer is not active.",
+                    game
+                );
                 continue;
             }
 
-            // Spawn the Godot avatar as a standalone bundle resource (skipping sidecars to bypass PCK execution security errors)
-            let resource_path = app_handle.path().resource_dir().unwrap_or_default().join("bin");
+            // Generate Window Label
+            let window_label = format!("avatar_{}", game.replace(".exe", ""));
+            
+            // Check if already exists
+            if app_handle.get_webview_window(&window_label).is_some() {
+                continue;
+            }
 
-            let audio_path = resource_path.join("motivation.wav");
-            let quote_text = match fetch_gemini_audio(&game, &audio_path).await {
-                Ok(t) => t,
-                Err(e) => {
-                    eprintln!("Gemini fetch error: {}", e);
-                    format!("Stop playing {} and go back to work!", game)
-                }
-            };
-
-            #[cfg(target_os = "macos")]
-            let exec_dir = resource_path.join("mac");
-            #[cfg(target_os = "macos")]
-            let exec_file = exec_dir.join("avatar-companion-mac");
-
-            #[cfg(target_os = "windows")]
-            let exec_dir = resource_path.join("win");
-            #[cfg(target_os = "windows")]
-            let exec_file = exec_dir.join("avatar-companion-win.exe");
-
-            #[cfg(target_os = "macos")]
-            let _ = Command::new("chmod").arg("+x").arg(&exec_file).status();
-
-            match Command::new(&exec_file)
-                .current_dir(&exec_dir)
-                .arg("--quote")
-                .arg(quote_text.trim())
-                .arg("--audio")
-                .arg(audio_path.to_string_lossy().to_string())
-                .spawn() {
-                Ok(child) => {
-                    println!("Successfully spawned Godot Avatar natively for {}", game);
+            // Spawn the new transparent Avatar Window
+            let url = tauri::WebviewUrl::App("avatar.html".into());
+            
+            match tauri::WebviewWindowBuilder::new(&app_handle, window_label.clone(), url)
+                .title("Focus Avatar")
+                .inner_size(400.0, 500.0)
+                .decorations(false)
+                .always_on_top(true)
+                .skip_taskbar(true)
+                .resizable(false)
+                .build() 
+            {
+                Ok(window) => {
+                    println!("Successfully spawned Tauri Avatar natively for {}", game);
                     let state = app_handle.state::<GameMonitorState>();
                     let mut avatars = state.active_avatars.lock().unwrap();
-                    avatars.insert(game.clone(), child);
+                    avatars.insert(game.clone(), window_label.clone());
+                    
+                    // Fetch Text and Audio from AI
+                    let game_clone = game.clone();
+                    let app_clone = app_handle.clone();
+                    
+                    tauri::async_runtime::spawn(async move {
+                        match fetch_deepseek_cartesia_audio(&game_clone).await {
+                            Ok((text, audio_bytes)) => {
+                                // Important: We use standard emit, but we target the specific window if needed, or emit globally. 
+                                // The new avatar script listens globally to `avatar-state` and `avatar-audio`.
+                                let _ = app_clone.emit("avatar-state", text);
+                                let _ = app_clone.emit("avatar-audio", audio_bytes);
+                            },
+                            Err(e) => {
+                                eprintln!("DeepSeek/Cartesia fetch error: {}", e);
+                            }
+                        }
+                    });
                 }
                 Err(e) => {
-                    eprintln!("Failed to spawn Godot Avatar natively {:?}: {}", exec_file, e);
+                    eprintln!("Failed to spawn Tauri Avatar natively: {}", e);
                 }
             }
         }
-        
+
         for event in events {
             if let Err(e) = app_handle.emit("game-event", &event) {
                 eprintln!("Failed to emit game event: {}", e);
